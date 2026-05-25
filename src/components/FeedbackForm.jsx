@@ -25,7 +25,9 @@ const FeedbackForm = () => {
     formState: { errors },
   } = useForm();
 
-  const APPS_SCRIPT_URL = import.meta.env.VITE_APPS_SCRIPT_URL || "https://script.google.com/macros/s/AKfycbxuqxvrDwky8oBuVlTNgfI1xvqvs6qGVEA61_FK7lm1o_8G1JD89cVA40Tpy21ajnZ1/exec";
+  const APPS_SCRIPT_URL =
+    import.meta.env.VITE_APPS_SCRIPT_URL ||
+    "https://script.google.com/macros/s/AKfycbz923XyuJHsXtmh96pKkcMAtvIZBdzSGr3VgyAwZesSHZy0hcVr2UHtzb3N7lDIM";
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);

@@ -9,13 +9,19 @@
  * 5. Copy the Web App URL and use it in your React frontend.
  */
 
+const SPREADSHEET_ID = "YOUR_SPREADSHEET_ID_HERE";
 const DISCORD_WEBHOOK_URL = "YOUR_DISCORD_WEBHOOK_URL_HERE";
 
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    
+
+    if (!SPREADSHEET_ID || SPREADSHEET_ID.includes("YOUR_SPREADSHEET_ID_HERE")) {
+      throw new Error("Spreadsheet ID is not configured. Update SPREADSHEET_ID in Code.gs.");
+    }
+
+    const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getActiveSheet();
+
     // Append to Google Sheet
     sheet.appendRow([
       new Date(),
@@ -30,14 +36,14 @@ function doPost(e) {
       data.unity,
       data.enjoyed,
       data.heard,
+      data.napRules,
       data.leadership,
-      data.concerns,
       data.finalMessage
     ]);
-    
-    // Send to Discord
+
+    // Send to Discord only when a valid webhook is configured
     sendToDiscord(data);
-    
+
     return ContentService.createTextOutput(JSON.stringify({ status: "success" }))
       .setMimeType(ContentService.MimeType.JSON);
   } catch (error) {
@@ -47,6 +53,10 @@ function doPost(e) {
 }
 
 function sendToDiscord(data) {
+  if (!DISCORD_WEBHOOK_URL || DISCORD_WEBHOOK_URL.includes("YOUR_DISCORD_WEBHOOK_URL_HERE")) {
+    return;
+  }
+
   const payload = {
     embeds: [{
       title: "🚀 New Feedback Received from " + data.ign,
