@@ -25,11 +25,14 @@ const FeedbackForm = () => {
     formState: { errors },
   } = useForm();
 
-  const APPS_SCRIPT_URL =
-    import.meta.env.VITE_APPS_SCRIPT_URL ||
-    "https://script.google.com/macros/s/AKfycbz923XyuJHsXtmh96pKkcMAtvIZBdzSGr3VgyAwZesSHZy0hcVr2UHtzb3N7lDIM";
+  const APPS_SCRIPT_URL = import.meta.env.VITE_APPS_SCRIPT_URL;
 
   const onSubmit = async (data) => {
+    if (!APPS_SCRIPT_URL) {
+      toast.error("Set VITE_APPS_SCRIPT_URL in .env before submitting.");
+      return;
+    }
+
     setIsSubmitting(true);
     playSound("submit");
 
