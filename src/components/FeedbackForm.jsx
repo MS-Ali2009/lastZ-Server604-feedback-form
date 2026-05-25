@@ -48,7 +48,8 @@ const FeedbackForm = () => {
         },
       );
 
-      if (response.data.status === "success") {
+      if (response.data.status === "success" || response.data.success === true) {
+      // if (response.data.status === "success") {
         setSubmitted(true);
         playSound("success");
         toast.success("Feedback Transmitted Successfully");
