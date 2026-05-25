@@ -15,7 +15,7 @@ const Header = () => {
 
   return (
     <motion.header
-      className="static md:sticky md:top-0 md:left-0 md:w-full md:z-50 px-6 py-4 flex items-center justify-between pointer-events-none bg-slate-950/80 backdrop-blur-xl border-b border-white/10"
+      className="fixed top-0 left-0 w-full md:sticky md:top-0 md:left-0 md:w-full md:z-50 z-50 px-6 py-4 flex items-center justify-between pointer-events-none backdrop-blur-xl border-b border-white/10"
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, delay: 0.5 }}

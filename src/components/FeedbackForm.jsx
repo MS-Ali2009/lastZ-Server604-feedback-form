@@ -25,6 +25,8 @@ const FeedbackForm = () => {
     formState: { errors },
   } = useForm();
 
+  const APPS_SCRIPT_URL = import.meta.env.VITE_APPS_SCRIPT_URL || "https://script.google.com/macros/s/AKfycbwvBGW-cldWzGE397209DEIruglNmYTtTCeAneT_MLQ8yi1Rn2p564LRvy8xrpsAO4z/exec";
+
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     playSound("submit");
@@ -32,7 +34,7 @@ const FeedbackForm = () => {
     // Send data to Google Apps Script
     try {
       const response = await axios.post(
-        "https://script.google.com/macros/s/AKfycbxV7zO0Okkf0dyxGUAS22upgAUNfJZhuBd6ddsVlohiuSUAnKyzEb8kiQrcjgIxxGax/exec",
+        APPS_SCRIPT_URL,
         data,
         {
           headers: {
@@ -129,15 +131,15 @@ const FeedbackForm = () => {
     {
       name: "heard",
       label: "Do you feel your alliance/player voice is heard in the server?",
-      type: "select",
-      options: ["Always", "Sometimes", "Rarely", "Never"],
+      type: "textarea",
+      placeholder: "Share your thoughts...",
       required: true,
     },
     {
       name: "napRules",
       label: "The new NAP rules shared in server email are you agree with them?",
-      type: "select",
-      options: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"],
+      type: "textarea",
+      placeholder: "Share your opinion on the NAP rules...",
       required: true,
     },
     {
