@@ -47,7 +47,7 @@ function App() {
               <Background />
               <CustomCursor />
               <Header />
-              <main className="relative z-10 pt-20 pb-20 px-4">
+              <main className="relative z-10 md:pt-20 pt-0 pb-20 px-4">
                 <FeedbackForm />
               </main>
               <ToastProvider position="bottom-right" 
