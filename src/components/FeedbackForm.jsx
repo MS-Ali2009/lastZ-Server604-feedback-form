@@ -43,7 +43,7 @@ const FeedbackForm = () => {
         data,
         {
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "text/plain;charset=utf-8",
           },
         },
       );
